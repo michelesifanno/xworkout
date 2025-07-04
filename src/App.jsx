@@ -1,20 +1,14 @@
-import { useState } from 'react'
-import { Provider } from "./components/ui/provider"
-import { Heading } from "@chakra-ui/react"
-import DebounceSearch from './components/app/DebounceSearch'
+import { RouterProvider } from 'react-router-dom';
+import router from "./routes/Routing";
+import { AuthProvider } from "./context/AuthContext";
+import { Provider } from "./components/ui/provider";
 
-
-
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
   return (
     <Provider>
-      <Heading>I'm a Heading</Heading>
-      <DebounceSearch />
-
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </Provider>
-  )
+  );
 }
-
-export default App

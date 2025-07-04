@@ -26,7 +26,7 @@ export default function useExercises(name) {
                 let query = supabase
                     .from("exercise_library")
                     .select(
-                        "name, target, equipment, gif_url, body_part, secondary_muscles, instructions, description, difficulty, category"
+                        "id, name, target, equipment, gif_url, body_part, secondary_muscles, instructions, description, difficulty, category"
                     );
 
                 if (name && name.trim() !== "") {

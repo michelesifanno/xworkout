@@ -6,7 +6,7 @@ import {
 import Root from "../pages/Root";
 import WorkoutPlans from "../pages/WorkoutPlans";
 import Exercises from "../pages/Exercises";
-import Signup from "../pages/Signup";
+import SignUp from "../pages/SignUp";
 
   export const router = createBrowserRouter([
     {
@@ -23,7 +23,7 @@ import Signup from "../pages/Signup";
         },
         {
           path: "/signup",
-          element: <Signup />
+          element: <SignUp />
         },
         {
           path: "/workout",

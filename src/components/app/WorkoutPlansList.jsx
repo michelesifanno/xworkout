@@ -35,7 +35,8 @@ export default function WorkoutPlansList() {
                             to={`/workout/${plan.id}`}
                             style={{ textDecoration: "none" }}
                         >
-                            <Card sx={{ height: "100%", cursor: "pointer", p: 2, }}>
+                            <Card elevation={0}
+                                sx={{ height: "100%", cursor: "pointer", p: 2, bgcolor: "black" }}>
                                 <Box display="flex" alignItems="center" gap={1} mb={1}>
                                     <FitnessCenterIcon color="primary" />
                                     <Typography variant="h6" color="text.primary">

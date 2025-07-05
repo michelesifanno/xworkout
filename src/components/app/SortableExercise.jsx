@@ -71,6 +71,13 @@ export default function SortableExercise({ ex, onChange, onDelete }) {
           alignItems: "center",
           gap: 1,
           paddingRight: 1,
+          backgroundColor: "black",       // sfondo nero pieno
+          color: "white",                 // testo bianco se vuoi
+          // rimuovi overlay / gradient e ombre fastidiose
+          "&::before": {
+            display: "none",
+          },
+
         }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -107,23 +114,23 @@ export default function SortableExercise({ ex, onChange, onDelete }) {
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
-            padding:'0px 0px 0px 20px',
+            padding: '0px 0px 0px 20px',
           }}
           onClick={(e) => e.stopPropagation()}
         >
           <Typography
             variant="h1"
-            sx={{ userSelect: "none", fontWeight: 600, lineHeight: "21px", mb: 1, fontSize:'16px' }}
+            sx={{ userSelect: "none", fontWeight: 600, lineHeight: "21px", mb: 1, fontSize: '16px' }}
           >
             {displayTitle.charAt(0).toUpperCase() + displayTitle.slice(1).toLowerCase()}
           </Typography>
-          <Divider sx={{mt:0.5, mb:1}} />
+          <Divider sx={{ mt: 0.5, mb: 1 }} />
           <Typography variant="caption" sx={{ opacity: 1 }}>
             <Typography
               variant="h1"
-            sx={{ userSelect: "none", fontWeight: 400, lineHeight: "19px", mb: 0, fontSize:'14px' }}
+              sx={{ userSelect: "none", fontWeight: 400, lineHeight: "19px", mb: 0, fontSize: '14px' }}
             >
-              <span style={{color:'#cbff06'}}><b>{localFields.reps}x{localFields.sets}</b></span> | <em><b>{localFields.weight} kg/lbs</b></em>
+              <span style={{ color: '#cbff06' }}><b>{localFields.reps}x{localFields.sets}</b></span> | <em><b>{localFields.weight} kg/lbs</b></em>
             </Typography>
 
           </Typography>
@@ -133,63 +140,63 @@ export default function SortableExercise({ ex, onChange, onDelete }) {
       </AccordionSummary>
 
       <AccordionDetails onClick={(e) => e.stopPropagation()}>
-  <Box
-    sx={{
-      display: "flex",
-      flexDirection: "column",
-      gap: 2,
-      alignItems: "stretch",
-      width: "100%",
-    }}
-  >
-    <TextField
-      label="Titolo Personalizzato"
-      size="small"
-      value={localFields.display_name}
-      onChange={(e) => handleLocalChange("display_name", e.target.value)}
-      fullWidth
-    />
-    <TextField
-      label="Sets"
-      type="number"
-      size="small"
-      value={localFields.sets}
-      onChange={(e) => handleLocalChange("sets", e.target.value)}
-      fullWidth
-    />
-    <TextField
-      label="Reps"
-      type="number"
-      size="small"
-      value={localFields.reps}
-      onChange={(e) => handleLocalChange("reps", e.target.value)}
-      fullWidth
-    />
-    <TextField
-      label="Kg"
-      type="number"
-      size="small"
-      value={localFields.weight}
-      onChange={(e) => handleLocalChange("weight", e.target.value)}
-      fullWidth
-    />
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
+            alignItems: "stretch",
+            width: "100%",
+          }}
+        >
+          <TextField
+            label="Titolo Personalizzato"
+            size="small"
+            value={localFields.display_name}
+            onChange={(e) => handleLocalChange("display_name", e.target.value)}
+            fullWidth
+          />
+          <TextField
+            label="Sets"
+            type="number"
+            size="small"
+            value={localFields.sets}
+            onChange={(e) => handleLocalChange("sets", e.target.value)}
+            fullWidth
+          />
+          <TextField
+            label="Reps"
+            type="number"
+            size="small"
+            value={localFields.reps}
+            onChange={(e) => handleLocalChange("reps", e.target.value)}
+            fullWidth
+          />
+          <TextField
+            label="Kg"
+            type="number"
+            size="small"
+            value={localFields.weight}
+            onChange={(e) => handleLocalChange("weight", e.target.value)}
+            fullWidth
+          />
 
-    <Button variant="contained" color="primary" onClick={handleSave}>
-      Salva
-    </Button>
+          <Button variant="contained" color="primary" onClick={handleSave}>
+            Salva
+          </Button>
 
-    <Button
-      variant="outlined"
-      color="error"
-      onClick={(e) => {
-        e.stopPropagation();
-        onDelete(ex.id);
-      }}
-    >
-      Elimina
-    </Button>
-  </Box>
-</AccordionDetails>
+          <Button
+            variant="outlined"
+            color="error"
+            onClick={(e) => {
+              e.stopPropagation();
+              onDelete(ex.id);
+            }}
+          >
+            Elimina
+          </Button>
+        </Box>
+      </AccordionDetails>
 
     </Accordion>
   );

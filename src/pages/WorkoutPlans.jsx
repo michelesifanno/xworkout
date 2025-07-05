@@ -1,8 +1,10 @@
-import React from "react";
 import CreateWorkoutPlan from "../components/app/CreateWorkoutPlan";
-
-export default function WorkoutPlans () {
+import WorkoutPlansList from "../components/app/WorkoutPlansList";
+export default function WorkoutPlans() {
     return (
-        <CreateWorkoutPlan />
+        <>
+            <CreateWorkoutPlan />
+            <WorkoutPlansList />
+        </>
     )
 }

@@ -1,9 +1,15 @@
 import { useState, useEffect } from "react";
-import { Input, Box, Text, Flex, Button } from "@chakra-ui/react";
 import useExercises from "../../utils/useLocalExercises";
-import ExerciseCard from "../ui/ExerciseCard";
-import AddExerciseDrawer from "../ui/AddExerciseDrawer";
-
+import ExerciseCard from "../app/ExerciseCard";
+import AddExerciseDrawer from "../app/AddExerciseDrawer";
+import {
+  Box,
+  Container,
+  TextField,
+  Typography,
+  Button,
+  Stack,
+} from "@mui/material";
 
 export default function DebounceSearch() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -52,47 +58,53 @@ export default function DebounceSearch() {
   }, [searchTerm]);
 
   return (
-    <Box maxW="400px" mx="auto" p={5}>
-      <Input
+    <Container maxWidth="sm" sx={{ py: 5 }}>
+      <TextField
+        fullWidth
         type="search"
-        placeholder="Cerca esercizi..."
+        label="Cerca esercizi..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        mb={4}
+        sx={{ mb: 4 }}
       />
 
-      {loading && <Text>Caricamento...</Text>}
-      {error && <Text color="red.500">{error}</Text>}
+      {loading && <Typography>Caricamento...</Typography>}
+      {error && <Typography color="error">{error}</Typography>}
       {debouncedTerm && !loading && displayExercises.length === 0 && (
-        <Text>Nessun risultato trovato.</Text>
+        <Typography>Nessun risultato trovato.</Typography>
       )}
 
-      <Box>
+      <Stack spacing={2}>
         {paginatedExercises.map((ex) => (
           <ExerciseCard key={ex.id} exercise={ex} onAdd={openDrawer} />
         ))}
-      </Box>
+      </Stack>
 
       {totalPages > 1 && (
-        <Flex justify="space-between" align="center" mt={6}>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          sx={{ mt: 4 }}
+        >
           <Button
             onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
             disabled={currentPage === 1}
-            colorScheme="teal"
+            variant="contained"
           >
             Indietro
           </Button>
-          <Text>
+          <Typography>
             Pagina {currentPage} di {totalPages}
-          </Text>
+          </Typography>
           <Button
             onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
             disabled={currentPage === totalPages}
-            colorScheme="teal"
+            variant="contained"
           >
             Avanti
           </Button>
-        </Flex>
+        </Stack>
       )}
 
       <AddExerciseDrawer
@@ -100,6 +112,6 @@ export default function DebounceSearch() {
         onClose={closeDrawer}
         exercise={selectedExercise}
       />
-    </Box>
+    </Container>
   );
 }

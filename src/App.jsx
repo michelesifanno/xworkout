@@ -1,14 +1,16 @@
 import { RouterProvider } from 'react-router-dom';
 import router from "./routes/Routing";
 import { AuthProvider } from "./context/AuthContext";
-import { Provider } from "./components/ui/provider";
+import { ThemeProvider, CssBaseline } from "@mui/material";
+import darkTheme from './theme/darkTheme';
 
 export default function App() {
   return (
-    <Provider>
-      <AuthProvider>
+    <AuthProvider>
+      <ThemeProvider theme={darkTheme}>
+                <CssBaseline />
         <RouterProvider router={router} />
-      </AuthProvider>
-    </Provider>
+      </ThemeProvider>
+    </AuthProvider>
   );
 }

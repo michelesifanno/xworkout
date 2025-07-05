@@ -4,11 +4,11 @@ const darkTheme = createTheme({
   palette: {
     mode: "dark",
     background: {
-      default: "#121212",
-      paper: "#1e1e1e",
+      default: "#000000",
+      paper: "#000000",
     },
     primary: {
-      main: "#e6ff70",
+      main: "#cbff06",
     },
     secondary: {
       main: "#90caf9",
@@ -38,21 +38,21 @@ const darkTheme = createTheme({
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          backgroundColor: "#121212",
+          backgroundColor: "#000000",
         },
       },
     },
     MuiPaper: {
       styleOverrides: {
         root: {
-          backgroundColor: "#1e1e1e",
+          backgroundColor: "#000000",
         },
       },
     },
     MuiCard: {
       styleOverrides: {
         root: {
-          backgroundColor: "#1e1e1e",
+          backgroundColor: "#000000",
           borderRadius: "10px",
         },
       },
@@ -60,7 +60,7 @@ const darkTheme = createTheme({
     MuiAccordion: {
       styleOverrides: {
         root: {
-          backgroundColor: "#1e1e1e",
+          backgroundColor: "#000000",
           color: "#fff",
         },
       },
@@ -68,7 +68,7 @@ const darkTheme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         root: {
-          backgroundColor: "#1c1c1e",
+          backgroundColor: "#0000",
         },
       },
     },
@@ -102,7 +102,7 @@ const darkTheme = createTheme({
             borderColor: "#888",
           },
           "&.Mui-focused fieldset": {
-            borderColor: "#e6ff70",
+            borderColor: "#cbff06",
           },
         },
       },
@@ -110,7 +110,7 @@ const darkTheme = createTheme({
     MuiDialog: {
       styleOverrides: {
         paper: {
-          backgroundColor: "#1e1e1e",
+          backgroundColor: "#000000",
         },
       },
     },
@@ -133,7 +133,7 @@ const darkTheme = createTheme({
         root: {
           color: "#aaa",
           "&.Mui-selected": {
-            color: "#e6ff70",
+            color: "#cbff06",
           },
         },
       },
@@ -141,10 +141,10 @@ const darkTheme = createTheme({
     MuiTabs: {
       styleOverrides: {
         root: {
-          backgroundColor: "#1e1e1e",
+          backgroundColor: "#000000",
         },
         indicator: {
-          backgroundColor: "#e6ff70",
+          backgroundColor: "#cbff06",
         },
       },
     },
@@ -153,7 +153,7 @@ const darkTheme = createTheme({
         root: {
           color: "#aaa",
           "&.Mui-selected": {
-            color: "#e6ff70",
+            color: "#cbff06",
           },
         },
       },
@@ -161,7 +161,7 @@ const darkTheme = createTheme({
     MuiTable: {
       styleOverrides: {
         root: {
-          backgroundColor: "#1e1e1e",
+          backgroundColor: "#000000",
           color: "#fff",
         },
       },
@@ -172,7 +172,7 @@ const darkTheme = createTheme({
           borderBottom: "1px solid #333",
         },
         head: {
-          color: "#e6ff70",
+          color: "#cbff06",
         },
         body: {
           color: "#fff",
@@ -182,7 +182,7 @@ const darkTheme = createTheme({
     MuiList: {
       styleOverrides: {
         root: {
-          backgroundColor: "#1e1e1e",
+          backgroundColor: "#000000",
         },
       },
     },
@@ -198,7 +198,7 @@ const darkTheme = createTheme({
         root: {
           color: "#ccc",
           "&:hover": {
-            color: "#e6ff70",
+            color: "#cbff06",
           },
         },
       },

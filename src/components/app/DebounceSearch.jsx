@@ -58,7 +58,7 @@ export default function DebounceSearch() {
   }, [searchTerm]);
 
   return (
-    <Container maxWidth="sm" sx={{ py: 5 }}>
+    <Container maxWidth="sm">
       <TextField
         fullWidth
         type="search"

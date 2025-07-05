@@ -5,7 +5,7 @@ import supabase from "../../supabase/client";
 import { useUserExercises } from "../../utils/useUserExercises";
 import { useAuth } from "../../context/AuthContext";
 
-import { Typography, Card, CardContent } from "@mui/material";
+import { Typography, Card, CardContent, Container, Box } from "@mui/material";
 
 import DebounceSearch from "./DebounceSearch";
 import ExerciseList from "./ExerciseList";
@@ -155,21 +155,25 @@ export default function WorkoutDetails() {
 
     return (
         <>
-            <DebounceSearch />
-            <Card>
-                <CardContent>
-                    <Typography variant="h5" gutterBottom>
-                        Dettaglio Workout Plan: {planName || "Caricamento..."}
-                    </Typography>
+            <Box sx={{ height: '120px' }} />
+            <Container maxWidth="sm">
+                <Typography variant="h1" component="h2" sx={{ fontSize: '30px', letterSpacing: '-1px', textAlign: 'center' }}>
+                    <b>{planName || "Caricamento..."}</b>
+                </Typography>
+                <br/>
+                <DebounceSearch />
+                <Card>
+                    <CardContent>
+                        <ExerciseList
+                            items={items}
+                            setItems={setItems}
+                            onChange={handleFieldChange}
+                            onDelete={handleDelete}
+                        />
+                    </CardContent>
+                </Card>
 
-                    <ExerciseList
-                        items={items}
-                        setItems={setItems}
-                        onChange={handleFieldChange}
-                        onDelete={handleDelete}
-                    />
-                </CardContent>
-            </Card>
+            </Container>
         </>
     );
 }

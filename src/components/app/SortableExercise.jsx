@@ -1,4 +1,3 @@
-// src/components/WorkoutDetails/SortableExercise.jsx
 import React, { useState } from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
@@ -10,9 +9,12 @@ import {
   TextField,
   Button,
   IconButton,
+  Box,
+  Divider
 } from "@mui/material";
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useSwipeable } from "react-swipeable";
 
 export default function SortableExercise({ ex, onChange, onDelete }) {
   const {
@@ -54,63 +56,100 @@ export default function SortableExercise({ ex, onChange, onDelete }) {
       ? ex.display_name
       : ex.exercise_library?.name;
 
+  // Swipe handlers
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: () => {
+      if (window.confirm("Vuoi eliminare questo esercizio?")) {
+        onDelete(ex.id);
+      }
+    },
+    preventScrollOnSwipe: true,
+    delta: 50, // distanza minima per attivare
+    trackTouch: true,
+    trackMouse: true,
+  });
+
   return (
     <Accordion
       ref={setNodeRef}
       sx={style}
-      {...attributes}
-      TransitionProps={{ unmountOnExit: true }}
+      {...swipeHandlers}
+      disableGutters
     >
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls={`panel-content-${ex.id}`}
         id={`panel-header-${ex.id}`}
-        sx={{ display: "flex", alignItems: "center", gap: 1 }}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          gap: 1,
+          paddingRight: 1,
+        }}
         onClick={(e) => e.stopPropagation()}
       >
-        <IconButton
-          ref={setActivatorNodeRef}
-          {...listeners}
-          sx={{ cursor: "grab" }}
-          onClick={(e) => e.stopPropagation()}
-          {...attributes}
+        {/* 10% Handle */}
+        <Box
+          sx={{ flexBasis: "10%", display: "flex", justifyContent: "center" }}
         >
-          <DragIndicatorIcon />
-        </IconButton>
+          <IconButton
+            ref={setActivatorNodeRef}
+            {...listeners}
+            sx={{ cursor: "grab" }}
+            onClick={(e) => e.stopPropagation()}
+            {...attributes}
+          >
+            <DragIndicatorIcon />
+          </IconButton>
+        </Box>
 
-        <img
-          src={ex.exercise_library?.gif_url}
-          alt={ex.exercise_library?.name}
-          width={70}
-          style={{ borderRadius: 6, marginRight: 10 }}
-          onClick={(e) => e.stopPropagation()}
-        />
-        <Typography
-          variant="subtitle1"
-          onClick={(e) => e.stopPropagation()}
-          sx={{ userSelect: "none", flexGrow: 1 }}
-        >
-          {displayTitle}
-        </Typography>
+        {/* 40% GIF */}
+        <Box sx={{ flexBasis: "40%" }}>
+          <img
+            src={ex.exercise_library?.gif_url}
+            alt={ex.exercise_library?.name}
+            width={150}
+            style={{ borderRadius: 6 }}
+            onClick={(e) => e.stopPropagation()}
+          />
+        </Box>
 
-        <Button
-          variant="outlined"
-          color="error"
-          size="small"
-          onClick={(e) => {
-            e.stopPropagation();
-            onDelete(ex.id);
+        {/* 40% testo */}
+        <Box
+          sx={{
+            flexBasis: "40%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
           }}
+          onClick={(e) => e.stopPropagation()}
         >
-          Elimina
-        </Button>
+          <Typography
+            variant="h1"
+            sx={{ userSelect: "none", fontWeight: 600, lineHeight: "25px", mb: 1, fontSize:'20px' }}
+          >
+            {displayTitle.charAt(0).toUpperCase() + displayTitle.slice(1).toLowerCase()}
+          </Typography>
+          <Divider sx={{mt:1, mb:2}} />
+          <Typography variant="caption" sx={{ opacity: 1 }}>
+            <Typography
+              variant="h1"
+            sx={{ userSelect: "none", fontWeight: 400, lineHeight: "23px", mb: 0, fontSize:'18px' }}
+            >
+              <span style={{color:'#cbff06'}}><b>{localFields.reps}x{localFields.sets}</b></span> | <em><b>{localFields.weight} kg/lbs</b></em>
+            </Typography>
+
+          </Typography>
+        </Box>
+
+        {/* 10% Expand icon (già gestita da prop expandIcon) */}
       </AccordionSummary>
 
       <AccordionDetails onClick={(e) => e.stopPropagation()}>
-        <div
-          style={{
+        <Box
+          sx={{
             display: "flex",
-            gap: 12,
+            gap: 2,
             alignItems: "center",
             flexWrap: "wrap",
           }}
@@ -119,7 +158,9 @@ export default function SortableExercise({ ex, onChange, onDelete }) {
             label="Titolo Personalizzato"
             size="small"
             value={localFields.display_name}
-            onChange={(e) => handleLocalChange("display_name", e.target.value)}
+            onChange={(e) =>
+              handleLocalChange("display_name", e.target.value)
+            }
             sx={{ minWidth: 200 }}
           />
           <TextField
@@ -147,7 +188,7 @@ export default function SortableExercise({ ex, onChange, onDelete }) {
           <Button variant="contained" color="primary" onClick={handleSave}>
             Salva
           </Button>
-        </div>
+        </Box>
       </AccordionDetails>
     </Accordion>
   );

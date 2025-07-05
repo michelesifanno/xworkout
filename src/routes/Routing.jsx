@@ -1,13 +1,12 @@
 import {
   createBrowserRouter,
 } from "react-router-dom";
-import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
 import Root from "../pages/Root";
 import WorkoutPlans from "../pages/WorkoutPlans";
 import Exercises from "../pages/Exercises";
-import SignUp from "../pages/SignUp";
 import Workout from "../pages/Workout";
+import SignInPage from "../pages/SignInPage";
 
 export const router = createBrowserRouter([
   {
@@ -16,27 +15,15 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Dashboard />
-      },
-      {
-        path: "/login",
-        element: <Login />,
-      },
-      {
-        path: "/signup",
-        element: <SignUp />
-      },
-      {
-        path: "/workout",
         element: <WorkoutPlans />
+      },
+      {
+        path: "/signin",
+        element: <SignInPage />,
       },
       {
         path: "/workout/:id",
         element: <Workout />
-      },
-      {
-        path: "/exercises",
-        element: <Exercises />
       },
     ],
   },

@@ -1,4 +1,3 @@
-// pages/Dashboard.jsx
 import { useAuth } from "../context/AuthContext";
 import supabase from "../supabase/client";
 import { useEffect } from "react";
@@ -10,7 +9,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     if (!user) {
-      navigate("/login"); // Redirect automatico se non loggato
+      navigate("/signin"); // Redirect automatico se non loggato
     }
   }, [user]);
 

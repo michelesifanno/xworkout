@@ -23,7 +23,7 @@ export default function SortableExercise({ ex, onChange, onDelete }) {
     transform,
     transition,
     setActivatorNodeRef,
-  } = useSortable({ id: ex.id });
+  } = useSortable({ id: ex.id, pressDelay: 150 });
 
   const [localFields, setLocalFields] = useState({
     sets: ex.sets || "",
@@ -88,7 +88,7 @@ export default function SortableExercise({ ex, onChange, onDelete }) {
           <IconButton
             ref={setActivatorNodeRef}
             {...listeners}
-            sx={{ cursor: "grab" }}
+            sx={{ cursor: "grab", touchAction: "none" }}
             onClick={(e) => e.stopPropagation()}
             {...attributes}
           >

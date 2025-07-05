@@ -75,3 +75,18 @@ button:focus-visible {
 .MuiAccordionSummary-content {
     background: #000 !important;
 }
+
+.MuiBox-root {
+  background-color: #000!important;
+  background: #000!important;
+}
+
+button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.css-1niwblt-MuiButtonBase-root-MuiIconButton-root {
+  margin: 0px!important;
+  padding: 0px!important;
+}
+
+.MuiAccordionSummary-root {
+    margin: 0px !important;
+    padding: 0px !important;
+}

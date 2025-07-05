@@ -1,11 +1,17 @@
 import React, { useEffect } from "react";
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
+import {
+    Card,
+    CardContent,
+    Typography,
+    Box,
+    Container,
+    Grid,
+    Button,
+} from "@mui/material";
+import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import { useWorkoutPlans } from "../../utils/useWorkoutPlans";
-import { useAuth } from "../../context/AuthContext";  
+import { useAuth } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
-
 
 export default function WorkoutPlansList() {
     const { user } = useAuth();
@@ -21,29 +27,26 @@ export default function WorkoutPlansList() {
     if (error) return <div>Error: {error}</div>;
 
     return (
-        <Card>
-            <CardContent>
-                <Typography variant="h5" gutterBottom>
-                    Workout Plans
-                </Typography>
+        <Container sx={{ mt: 4 }}>
+            <Grid container spacing={3}>
                 {plans.map((plan) => (
-                    <Link
-                        key={plan.id}
-                        to={`/workout/${plan.id}`}
-                        style={{ textDecoration: 'none' }}
-                    >
-                        <Card sx={{ mb: 2, cursor: 'pointer' }}>
-                            <CardContent>
-                                <Typography variant="h6">{plan.title}</Typography>
-                                <Typography variant="body2" color="text.secondary">
-                                    {plan.description}
-                                </Typography>
-                            </CardContent>
-                        </Card>
-                    </Link>
+                    <Grid item xs={12} sm={12} md={12} key={plan.id}>
+                        <Link
+                            to={`/workout/${plan.id}`}
+                            style={{ textDecoration: "none" }}
+                        >
+                            <Card sx={{ height: "100%", cursor: "pointer", p: 2, }}>
+                                <Box display="flex" alignItems="center" gap={1} mb={1}>
+                                    <FitnessCenterIcon color="primary" />
+                                    <Typography variant="h6" color="text.primary">
+                                        {plan.title}
+                                    </Typography>
+                                </Box>
+                            </Card>
+                        </Link>
+                    </Grid>
                 ))}
-            </CardContent>
-        </Card>
+            </Grid>
+        </Container>
     );
 }
-

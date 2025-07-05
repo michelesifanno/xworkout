@@ -14,7 +14,6 @@ import {
 } from "@mui/material";
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { useSwipeable } from "react-swipeable";
 
 export default function SortableExercise({ ex, onChange, onDelete }) {
   const {
@@ -56,24 +55,11 @@ export default function SortableExercise({ ex, onChange, onDelete }) {
       ? ex.display_name
       : ex.exercise_library?.name;
 
-  // Swipe handlers
-  const swipeHandlers = useSwipeable({
-    onSwipedLeft: () => {
-      if (window.confirm("Vuoi eliminare questo esercizio?")) {
-        onDelete(ex.id);
-      }
-    },
-    preventScrollOnSwipe: true,
-    delta: 50, // distanza minima per attivare
-    trackTouch: true,
-    trackMouse: true,
-  });
 
   return (
     <Accordion
       ref={setNodeRef}
       sx={style}
-      {...swipeHandlers}
       disableGutters
     >
       <AccordionSummary
@@ -104,11 +90,11 @@ export default function SortableExercise({ ex, onChange, onDelete }) {
         </Box>
 
         {/* 40% GIF */}
-        <Box sx={{ flexBasis: "40%" }}>
+        <Box sx={{ flexBasis: "20%" }}>
           <img
             src={ex.exercise_library?.gif_url}
             alt={ex.exercise_library?.name}
-            width={150}
+            width={100}
             style={{ borderRadius: 6 }}
             onClick={(e) => e.stopPropagation()}
           />
@@ -117,24 +103,25 @@ export default function SortableExercise({ ex, onChange, onDelete }) {
         {/* 40% testo */}
         <Box
           sx={{
-            flexBasis: "40%",
+            flexBasis: "60%",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
+            padding:'0px 0px 0px 20px',
           }}
           onClick={(e) => e.stopPropagation()}
         >
           <Typography
             variant="h1"
-            sx={{ userSelect: "none", fontWeight: 600, lineHeight: "25px", mb: 1, fontSize:'20px' }}
+            sx={{ userSelect: "none", fontWeight: 600, lineHeight: "21px", mb: 1, fontSize:'16px' }}
           >
             {displayTitle.charAt(0).toUpperCase() + displayTitle.slice(1).toLowerCase()}
           </Typography>
-          <Divider sx={{mt:1, mb:2}} />
+          <Divider sx={{mt:0.5, mb:1}} />
           <Typography variant="caption" sx={{ opacity: 1 }}>
             <Typography
               variant="h1"
-            sx={{ userSelect: "none", fontWeight: 400, lineHeight: "23px", mb: 0, fontSize:'18px' }}
+            sx={{ userSelect: "none", fontWeight: 400, lineHeight: "19px", mb: 0, fontSize:'14px' }}
             >
               <span style={{color:'#cbff06'}}><b>{localFields.reps}x{localFields.sets}</b></span> | <em><b>{localFields.weight} kg/lbs</b></em>
             </Typography>
@@ -146,50 +133,64 @@ export default function SortableExercise({ ex, onChange, onDelete }) {
       </AccordionSummary>
 
       <AccordionDetails onClick={(e) => e.stopPropagation()}>
-        <Box
-          sx={{
-            display: "flex",
-            gap: 2,
-            alignItems: "center",
-            flexWrap: "wrap",
-          }}
-        >
-          <TextField
-            label="Titolo Personalizzato"
-            size="small"
-            value={localFields.display_name}
-            onChange={(e) =>
-              handleLocalChange("display_name", e.target.value)
-            }
-            sx={{ minWidth: 200 }}
-          />
-          <TextField
-            label="Sets"
-            type="number"
-            size="small"
-            value={localFields.sets}
-            onChange={(e) => handleLocalChange("sets", e.target.value)}
-          />
-          <TextField
-            label="Reps"
-            type="number"
-            size="small"
-            value={localFields.reps}
-            onChange={(e) => handleLocalChange("reps", e.target.value)}
-          />
-          <TextField
-            label="Kg"
-            type="number"
-            size="small"
-            value={localFields.weight}
-            onChange={(e) => handleLocalChange("weight", e.target.value)}
-          />
+  <Box
+    sx={{
+      display: "flex",
+      flexDirection: "column",
+      gap: 2,
+      alignItems: "stretch",
+      width: "100%",
+    }}
+  >
+    <TextField
+      label="Titolo Personalizzato"
+      size="small"
+      value={localFields.display_name}
+      onChange={(e) => handleLocalChange("display_name", e.target.value)}
+      fullWidth
+    />
+    <TextField
+      label="Sets"
+      type="number"
+      size="small"
+      value={localFields.sets}
+      onChange={(e) => handleLocalChange("sets", e.target.value)}
+      fullWidth
+    />
+    <TextField
+      label="Reps"
+      type="number"
+      size="small"
+      value={localFields.reps}
+      onChange={(e) => handleLocalChange("reps", e.target.value)}
+      fullWidth
+    />
+    <TextField
+      label="Kg"
+      type="number"
+      size="small"
+      value={localFields.weight}
+      onChange={(e) => handleLocalChange("weight", e.target.value)}
+      fullWidth
+    />
 
-          <Button variant="contained" color="primary" onClick={handleSave}>
-            Salva
-          </Button>
-        </Box>
-      </AccordionDetails>
+    <Button variant="contained" color="primary" onClick={handleSave}>
+      Salva
+    </Button>
+
+    <Button
+      variant="outlined"
+      color="error"
+      onClick={(e) => {
+        e.stopPropagation();
+        onDelete(ex.id);
+      }}
+    >
+      Elimina
+    </Button>
+  </Box>
+</AccordionDetails>
+
     </Accordion>
   );
 }

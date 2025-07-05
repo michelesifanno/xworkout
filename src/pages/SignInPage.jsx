@@ -31,7 +31,7 @@ export default function SignInPage() {
                 justifyContent: "center",
             }}
         >
-            <Container maxWidth="sm" sx={{pb:2}}>
+            <Container maxWidth="sm" sx={{ pb: 2 }}>
                 <p style={{ textAlign: 'center' }}>
                     <img src="logo.png" width={'80px'} />
                 </p>

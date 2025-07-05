@@ -19,7 +19,7 @@ export function useWorkoutPlans() {
       .from("workout_plans")
       .select("*")
       .eq("user_id", user_id)
-      .order("created_at", { ascending: false });
+      .order("order", { ascending: true });
 
     setLoading(false);
 

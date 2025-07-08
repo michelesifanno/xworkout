@@ -5,7 +5,7 @@ import supabase from "../../supabase/client";
 import { useUserExercises } from "../../utils/useUserExercises";
 import { useAuth } from "../../context/AuthContext";
 
-import { Typography, Card, CardContent, Container, Box } from "@mui/material";
+import { Typography, Card, CardContent, Container, Box, Button } from "@mui/material";
 
 import DebounceSearch from "./DebounceSearch";
 import ExerciseList from "./ExerciseList";
@@ -150,17 +150,31 @@ export default function WorkoutDetails() {
     };
 
 
+    const handleWorkoutDelete = async (id) => {
+        if (
+            !window.confirm("Sei sicuro di voler eliminare questo esercizio dal piano?")
+        )
+            return;
+        const { error } = await supabase.from("workout_plans").delete().eq("id", planId);
+        if (error) {
+            alert("Errore eliminando esercizio: " + error.message);
+            return;
+        }
+        setItems((old) => old.filter((item) => item.id !== id));
+    };
+
+
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
 
     return (
         <>
-            <Box sx={{ height: '120px' }} />
-            <Container maxWidth="sm">
+            <Box sx={{ height: '80px' }} />
+            <Container maxWidth="sm" sx={{pt:2, pb:6}}>
                 <Typography variant="h1" component="h2" sx={{ fontSize: '30px', letterSpacing: '-1px', textAlign: 'center' }}>
                     <b>{planName || "Caricamento..."}</b>
                 </Typography>
-                <br/>
+                <br />
                 <DebounceSearch />
                 <Card>
                     <CardContent>
@@ -173,6 +187,11 @@ export default function WorkoutDetails() {
                     </CardContent>
                 </Card>
 
+                <Button
+                    onClick={handleWorkoutDelete}
+                    sx={{ marginTop: "1rem", display: 'block', marginLeft: 'auto', marginRight: 'auto' }}>
+                    Elimina Workout Plan
+                </Button>
             </Container>
         </>
     );

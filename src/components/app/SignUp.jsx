@@ -1,6 +1,7 @@
 import { useState } from "react";
 import supabase from "../../supabase/client";
 import { useNavigate } from "react-router-dom";
+import { Container, Grid, Typography, TextField, Button, Divider } from '@mui/material';
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -31,33 +32,52 @@ export default function SignUp() {
   };
 
   return (
-    <div>
-      <h2>Signup</h2>
-      <input
-        type="email"
-        value={email}
+    <form onSubmit={handleSignup}>
+      <TextField
+        variant="outlined"
+        margin="normal"
+        required
+        fullWidth
+        id="email"
+        label="Indirizzo e-mail"
+        name="email"
+        autoFocus
         onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
       />
-      <input
+
+      <TextField
+        variant="outlined"
+        margin="normal"
+        required
+        fullWidth
+        name="display name"
+        label="Nickname"
         type="text"
-        value={display_name}
+        id="display name"
         onChange={(e) => setDisplay_name(e.target.value)}
-        placeholder="Display Name"
       />
-      <input
-        type="tel"
-        value={phone}
-        onChange={(e) => setPhone(e.target.value)}
-        placeholder="Phone"
-      />
-      <input
+
+      <TextField
+        variant="outlined"
+        margin="normal"
+        required
+        fullWidth
+        name="password"
+        label="Password"
         type="password"
-        value={password}
+        id="password"
         onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
       />
-      <button onClick={handleSignup}>Signup</button>
-    </div>
+
+      <Button
+        type="submit"
+        fullWidth
+        variant="contained"
+        color="primary"
+        size="large"
+      >
+        Registrati
+      </Button>
+    </form>
   );
 }

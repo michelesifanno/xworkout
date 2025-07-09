@@ -11,25 +11,28 @@ export default function SignUp() {
 
   const navigate = useNavigate();
 
-  const handleSignup = async () => {
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: {
-          display_name,
-          phone,
-        },
-      },
-    });
+  const handleSignup = async (e) => {
+  e.preventDefault(); // ⛔ impedisce il reload della pagina
 
-    if (error) {
-      alert(error.message);
-    } else {
-      alert("Registrazione completata");
-      navigate("/login");
-    }
-  };
+  const { error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: {
+        display_name,
+        phone,
+      },
+    },
+  });
+
+  if (error) {
+    alert(error.message);
+  } else {
+    alert("Registrazione completata");
+    navigate("/");
+  }
+};
+
 
   return (
     <form onSubmit={handleSignup}>
